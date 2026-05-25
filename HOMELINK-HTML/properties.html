@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properties | MADEHOME</title>
+  <link rel="stylesheet" href="../HOMELINK-CSS/HOMELINK.CSS">
+</head>
+
+<body>
+
+  
+  <main class="properties-page">
+    
+
+    <section class="property-search">
+      <div class="search-card">
+        <div class="search-input">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchbox" class="searchbox" placeholder="Search by title">
+        </div>
+
+        <select id="location-select" class="search-select">
+          <option value="All locations">All locations</option>
+          <option value="Plateau">Plateau</option>
+          <option value="Abuja">Abuja</option>
+        </select>
+
+        <select id="type-select" class="filter-select">
+          <option value="All property types">property types</option>
+          <option value="Rent">Rent</option>
+          <option value="Sale">Sale</option>
+        </select>
+
+        <button class="search-btn" type="button">Search</button>
+      </div>
+      <p class="property-summary">Discover our latest homes with crisp images, modern interiors, and trusted property details.</p>
+    </section>
+
+    <section class="property-grid-section">
+      <div class="property-div"></div>
+    </section>
+
+    <section class="properties-hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Premium Listings</span>
+        <h1>Handpicked homes for every lifestyle</h1>
+        <p>Browse modern, trustworthy property options with clear pricing and fast access to details.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-card">
+          <p>Available Homes</p>
+          <strong>24</strong>
+        </div>
+        <div class="hero-card">
+          <p>Client Rating</p>
+          <strong>4.9/5</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+<script type="module" src="../HOMELINK-JS/listing.js"></script>
+  <script type="module" src="../HOMELINK-JS/search.js"></script>
+</body>
+
+</html>

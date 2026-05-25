@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeFast - Premium Homes & Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1909a7;
+            --accent: #ff6b00;
+            --dark: #0f172a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 2.1rem; font-weight: 800; color: var(--primary); }
+        .logo span { color: var(--accent); }
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(25,9,167,0.82), rgba(25,9,167,0.75)), url('../images/interior2.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 160px 5% 100px;
+        }
+        .hero h1 { 
+            font-size: 3.3rem; 
+            margin-bottom: 1rem; 
+            line-height: 1.1;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 1200px;
+            margin: -70px auto 60px;
+            padding: 0 5%;
+        }
+        .search-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .search-input, .search-type, .search-location {
+            padding: 16px 20px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            flex: 1;
+            min-width: 220px;
+        }
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 45px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .search-btn:hover {
+            background: #0f0578;
+            transform: translateY(-3px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.7rem;
+            color: var(--primary);
+            margin: 3.5rem 0 2.5rem;
+        }
+
+        /* Featured Properties */
+        .search-results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+        }
+        .feature-box {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .feature-image-div { position: relative; height: 260px; }
+        .feature-image { width: 100%; height: 100%; object-fit: cover; }
+        .feature-price {
+            position: absolute; top: 15px; left: 15px;
+            background: var(--primary); color: white;
+            padding: 8px 18px; border-radius: 30px; font-weight: bold;
+        }
+        .service-type {
+            position: absolute; top: 15px; right: 15px;
+            background: white; color: var(--primary);
+            padding: 6px 14px; border-radius: 30px; font-size: 0.9rem;
+        }
+        #exit-search {
+            position: absolute; top: 15px; right: 15px;
+            background: #e11d48; color: white;
+            width: 50px; height: 50px; border-radius: 50%;
+            border: none; font-size: 26px; cursor: pointer;
+        }
+
+        /* Beautiful Service Cards */
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 1.8rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(25,9,167,0.15);
+        }
+        .service-card i {
+            font-size: 3.2rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+        }
+
+        /* Values & Offerings */
+        .value-card, .offering-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+        }
+        .value-card:hover, .offering-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Agents */
+        .agent-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .agent-card img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #f0f0f0;
+            margin: 20px auto;
+        }
+
+        footer {
+            background: var(--dark);
+            color: #cbd5e1;
+            padding: 80px 5% 40px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar { flex-direction: column; }
+            .hero h1 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo"><span>Home</span>Fast</div>
+            <ul class="nav-links">
+                <li><a href="#">HOME</a></li>
+                <li><a href="../HOMELINK-HTML/properties.html">PROPERTIES</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#meet-our-agents">AGENTS</a></li>
+                <li><a href="#contact-body">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Find the Perfect Place to Live with Your Family</h1>
+        <p class="stats">Over 54,000+ premium apartments, houses & plots across Nigeria</p>
+    </section>
+
+    <!-- Search -->
+    <div class="search-container">
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Enter Property Name">
+            <select class="search-type">
+                <option value="">Select Type</option>
+                <option value="Sale">For Sale</option>
+                <option value="Rent">For Rent</option>
+            </select>
+            <select class="search-location">
+                <option value="">Select Location</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Port Harcourt">Port Harcourt</option>
+            </select>
+            <button class="search-btn">SEARCH</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Featured Properties -->
+        <section class="all-features-properties">
+            <h2 class="section-title">Featured Properties</h2>
+            <div id="results-container"></div>
+        </section>
+
+        <!-- Services -->
+        <section id="services">
+            <h2 class="section-title">Our Services</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <div class="service-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Home & Properties Listing</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-broom"></i>
+                    <h3>Home & Office Cleaning</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bug"></i>
+                    <h3>Fumigation & Pest Control</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Moving & Relocation</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Electrical Installation</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us -->
+        <section id="About">
+            <h2 class="section-title">About Us</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                <div>
+                    <p><strong>QUIKHOMES</strong> was created to raise the bar for property search and home services in Nigeria.</p>
+                    <p>We connect buyers, renters and investors to trusted homes with full transition support.</p>
+                </div>
+                <img src="../images/interior2.jpg" alt="Modern Home" style="width:100%; border-radius:20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+            </div>
+        </section>
+
+        <!-- Values -->
+        <section>
+            <h2 class="section-title">Our Values</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                <div class="value-card">
+                    <h3>🔒 Trust</h3>
+                    <p>Transparency and honesty in every transaction.</p>
+                </div>
+                <div class="value-card">
+                    <h3>⭐ Excellence</h3>
+                    <p>Uncompromising standards in service and quality.</p>
+                </div>
+                <div class="value-card">
+                    <h3>🤝 Integrity</h3>
+                    <p>Building long-term relationships based on ethics.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Offerings -->
+        <section class="rentals-land-section">
+            <h2 class="section-title">What We Offer</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px;">
+                <div class="offering-card">Properties for Rent</div>
+                <div class="offering-card">Properties for Sale</div>
+                <div class="offering-card">Land for Sale</div>
+            </div>
+        </section>
+
+        <!-- Agents -->
+        <section id="meet-our-agents">
+            <h2 class="section-title">Meet Our Top Agents</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <!-- Agent Cards -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>HomeFast</h2>
+                <p>Curating Nigeria’s finest properties with integrity and excellence.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <p>Properties</p>
+                <p>Services</p>
+                <p>Our Team</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>+234 90 1222 1880</p>
+                <p>koplamajohn@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+<script type="module">
+    // Your existing search script (kept functional)
+    let houselisting = [];
+
+    // Load data from JSON file
+    async function loadHouselisting() {
+        try {
+            const response = await fetch('./HOMELINK-JS/houselisting.json')
+            const data = await response.json()
+            houselisting = data.houselisting
+            init()
+        } catch (error) {
+            console.error('Error loading houselisting:', error)
+        }
+    }
+
+    const searchInput = document.querySelector('.search-input');
+    const searchType = document.querySelector('.search-type');
+    const searchLocation = document.querySelector('.search-location');
+    const searchBtn = document.querySelector('.search-btn');
+    const resultsContainer = document.getElementById('results-container');
+
+    let currentProperties = [];
+    let originalContent = '';
+
+    const textValue = (value) => String(value || '').toLowerCase().trim();
+
+    function init() {
+        saveOriginalContent();
+    }
+
+    function saveOriginalContent() {
+        originalContent = resultsContainer.innerHTML;
+    }
+
+    function displaySearchResults(properties) {
+        if (!resultsContainer) return;
+        let html = `<div style="position:relative;margin-bottom:25px;"><button id="exit-search">✕</button></div><div class="search-results-grid">`;
+
+        if (!properties || properties.length === 0) {
+            html += `<div style="grid-column:1/-1;text-align:center;padding:80px;"><h3>No properties found</h3></div>`;
+        } else {
+            properties.forEach((house, index) => {
+                const price = typeof house.totalFee === 'number' ? `₦${house.totalFee.toLocaleString()}` : house.totalFee;
+                html += `
+                    <div class="feature-box">
+                        <div class="feature-image-div">
+                            <img src="${house.image}" class="feature-image" alt="${house.venue}">
+                            <button class="feature-price">${price}</button>
+                            <button class="service-type">${house.servicetype || 'Property'}</button>
+                        </div>
+                        <div style="padding:20px;">
+                            <h3>${house.venue}</h3>
+                            <p>${house.bedspace || ''} | ${house.bathspace || ''} | ${house.compoundspace || ''}</p>
+                            <p><strong>${house.location || ''}</strong></p>
+                            <button class="book-now-btn" data-index="${index}" style="margin-top:15px;width:100%;padding:14px;background:var(--primary);color:white;border:none;border-radius:10px;">Book Now</button>
+                        </div>
+                    </div>`;
+            });
+        }
+        html += `</div>`;
+        resultsContainer.innerHTML = html;
+
+        document.getElementById('exit-search').addEventListener('click', () => {
+            resultsContainer.innerHTML = originalContent;
+            searchInput.value = searchType.value = searchLocation.value = '';
+        });
+    }
+
+    function performSearch() {
+        const query = textValue(searchInput.value);
+        const type = searchType.value;
+        const location = searchLocation.value;
+
+        const filtered = houselisting.filter(house => {
+            const qMatch = !query || textValue(house.venue).includes(query) || textValue(house.location).includes(query);
+            const tMatch = !type || type === 'Select Type' || textValue(house.servicetype) === textValue(type);
+            const lMatch = !location || location === 'Select Location' || textValue(house.location).includes(textValue(location));
+            return qMatch && tMatch && lMatch;
+        });
+
+        currentProperties = filtered;
+        displaySearchResults(filtered);
+    }
+
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') performSearch(); });
+
+    document.addEventListener('click', e => {
+        if (e.target.classList.contains('book-now-btn')) {
+            const index = Number(e.target.dataset.index);
+            const property = currentProperties[index];
+            if (property) {
+                localStorage.setItem('selectedHouse', JSON.stringify(property));
+                window.location.href = 'detailpage.html';
+            }
+        }
+    });
+
+    loadHouselisting();
+</script>
+</body>
+</html>
