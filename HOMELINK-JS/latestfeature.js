@@ -59,7 +59,7 @@ function displayRentFeatures() {
                         </div>
                         <div class="location-area">${houses.location}</div> 
                     </h5>
-                    <button class="book-now-btn"><a href="../HOMELINK-HTML/detailpage.html">Book Now</a></button>
+                    <button class="book-now-btn"><a href="./HOMELINK-HTML/detailpage.html">Book Now</a></button>
                 </div>
             </div>`;
 
