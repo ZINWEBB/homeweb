@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
-  branch: NEWBRANCH
-  repo: ZINWEBB/HOMELINK
+  branch: "main"
+  repo: ZINWEBB/homeweb
 
 media_library:
   name: cloudinary
