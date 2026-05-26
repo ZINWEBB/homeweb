@@ -5,7 +5,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "WUSE- MAITAMA<BR > <span class=state>ABUJA</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -70,7 +70,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "GRA- IKEJA<BR > <span class=state>LAGOS</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -91,7 +91,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "BUKURA ESTATE- JOS<BR > <span class=state>PLATEAU</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -114,7 +114,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "NOBLE VILLE- PORT-HARCOURT<BR > <span class=state>RIVERS</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -136,7 +136,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "OLD JUTH- JOS<BR > <span class=state>PLATEAU</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -158,7 +158,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "NNPC MEGA STATION- JOS<BR > <span class=state>PLATEAU</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -179,7 +179,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "ASOKORO AVENUE- GWARIMPA<BR > <span class=state>ABUJA</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -200,7 +200,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "RAILWAY- EBUTE-METTA<BR > <span class=state>LAGOS</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -221,7 +221,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "RINGROAD- JOS<BR > <span class=state>PLATEAU</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -242,7 +242,7 @@
     {
       "id": "HL9U7",
       "venue": "3 BEDROOM APARTMENT",
-      "location": "OLD AIRPORT- JOS<BR > <span class=state>PLATEAU</span>",
+      "location": "MC-ALLEY- BASSA<BR > <span class=state>PLATEAU</span>",
       "description": "well tiled alredy furnished and no water and landlord free wifi",
       "basicFee": 160000,
       "agentFee": "16000",
@@ -269,18 +269,25 @@
   ],
   "homepageRentList": [
     {
-      "id": "1VB3Y",
-      "venue": "2 BEDROOM FLAT",
-      "description": "well tiled alredy furnished and water runnving in the compound and landlord need marrieds couple in the compound",
-      "basicFee": 124000,
-      "agentFee": "12400 (10%)",
-      "image": "https://myersjackson.com/wp-content/uploads/2022/01/shutterstock_221187091.jpg",
+       "id": "HL9U7",
+      "venue": "3 BEDROOM APARTMENT",
+      "location": "MC-ALLEY- BASSA<BR > <span class=state>PLATEAU</span>",
+      "description": "well tiled alredy furnished and no water and landlord free wifi",
+      "basicFee": 160000,
+      "agentFee": "16000",
+      "image": "https://cdn.tollbrothers.com/communities/13316/images-resized/Woodsons-Reserve---Executive_Valen-Modern-Farmhouse_Front-Elevetion_05_1920.jpg",
       "totalFee": 145000,
-      "servicetype": "rent",
-      "bedspace": "4 beds",
-      "bathspace": "7 baths",
-      "compoundspace": "parking",
-      "location": "RINGROAD- JOS"
+      "servicetype": "sale",
+      "gallery": [
+        "https://th.bing.com/th/id/R.4178e3857ab5172b4551ae58e537ddd3?rik=vLrqxJHMnOtDug&riu=http%3a%2f%2fi.huffpost.com%2fgadgets%2fslideshows%2f251377%2fslide_251377_1539376_free.jpg&ehk=IMKvjkDvnoWy%2feO6Ajcp2F%2bAePu1p8aFo5MnPjDCgpE%3d&risl=&pid=ImgRaw&r=0",
+        "https://myersjackson.com/wp-content/uploads/2022/01/shutterstock_221187091.jpg",
+        "https://www.zillowstatic.com/bedrock/app/uploads/sites/47/2021/10/house-selling-checklist-1280x720.jpg",
+        "https://cdn.tollbrothers.com/communities/13316/images-resized/Woodsons-Reserve---Executive_Valen-Modern-Farmhouse_Front-Elevetion_05_1920.jpg"
+      ],
+      "bedspace": "3 beds",
+      "bathspace": "3 baths",
+      "compoundspace": "wifi",
+      "inspection": 20000
     },
     {
       "id": "L6I",
