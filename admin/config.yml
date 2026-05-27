@@ -34,9 +34,8 @@ collections:
               - label: "Gallery"
                 name: "gallery"
                 widget: "list"
-                field:
-                  label: "Image URL"
-                  widget: "image"
+                fields:
+                  - {label: "Image URL", name: "image", widget: "image"}
               - {label: "Bed Space", name: "bedspace", widget: "string"}
               - {label: "Bath Space", name: "bathspace", widget: "string"}
               - {label: "Compound Space", name: "compoundspace", widget: "string"}
