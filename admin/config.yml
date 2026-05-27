@@ -10,28 +10,35 @@ media_library:
     api_key: "547679675493895"
 
 collections:
-  - name: "house_listings"
+  - name: "houselisting"
     label: "House Listings"
     folder: ""
     files:
       - file: "HOMELINK-JS/houselisting.json"
         label: "House Listings"
-        name: "listings"
+        name: "houselisting"
         fields:
-          - label: "Listings"
-            name: "listings"
+          - label: "House Listing"
+            name: "houselisting"
             widget: "list"
             fields:
-              - {label: "Title", name: "title", widget: "string"}
-              - {label: "Price", name: "price", widget: "number"}
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Venue", name: "venue", widget: "string"}
               - {label: "Location", name: "location", widget: "string"}
               - {label: "Description", name: "description", widget: "text"}
-              - label: "Images"
-                name: "images"
+              - {label: "Basic Fee", name: "basicFee", widget: "number"}
+              - {label: "Agent Fee", name: "agentFee", widget: "string"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Total Fee", name: "totalFee", widget: "number"}
+              - {label: "Service Type", name: "servicetype", widget: "string"}
+              - label: "Gallery"
+                name: "gallery"
                 widget: "list"
-                fields:
-                  - {label: "Image", name: "image", widget: "image"}
-              - {label: "Bedrooms", name: "bedrooms", widget: "number"}
-              - {label: "Bathrooms", name: "bathrooms", widget: "number"}
-              - {label: "Square Feet", name: "sqft", widget: "number"}
+                field:
+                  label: "Image URL"
+                  widget: "image"
+              - {label: "Bed Space", name: "bedspace", widget: "string"}
+              - {label: "Bath Space", name: "bathspace", widget: "string"}
+              - {label: "Compound Space", name: "compoundspace", widget: "string"}
+              - {label: "Inspection Fee", name: "inspection", widget: "number"}
 
