@@ -3,13 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <title>Admin</title>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script src="https://unpkg.com/netlify-cms-app@^2.0.0/dist/netlify-cms.js"></script>
   </head>
   <body>
+    <h1>Loading admin...</h1>
     <script>
-      CMS.init({
-        config: '/admin/config.yml'
-      });
+      if (typeof CMS === 'undefined') {
+        document.body.innerHTML = '<div style="padding: 2rem; font-family: sans-serif;">Error: Netlify CMS failed to load. Check your browser console and network connection.</div>';
+      } else {
+        CMS.init({
+          config: '/admin/config.yml'
+        });
+      }
     </script>
   </body>
 </html>
