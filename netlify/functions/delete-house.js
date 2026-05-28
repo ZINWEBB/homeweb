@@ -3,7 +3,7 @@ const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = process.env.GITHUB_OWNER;
 const REPO = process.env.GITHUB_REPO;
-const PATH = "data.json";
+const PATH = "HOMELINK-JS/houselisting.json";
 const PASSWORD = process.env.ADMIN_PASSWORD;
 
 exports.handler = async (event) => {
@@ -29,7 +29,8 @@ exports.handler = async (event) => {
     });
 
     const content = Buffer.from(fileData.content, "base64").toString();
-    let houses = JSON.parse(content);
+    const data = JSON.parse(content);
+    let houses = data.houselisting || [];
 
     const initialLength = houses.length;
     houses = houses.filter(h => h.id !== id);
@@ -43,7 +44,7 @@ exports.handler = async (event) => {
       repo: REPO,
       path: PATH,
       message: `Delete house ID: ${id}`,
-      content: Buffer.from(JSON.stringify(houses, null, 2)).toString("base64"),
+      content: Buffer.from(JSON.stringify({ houselisting: houses }, null, 2)).toString("base64"),
       sha: fileData.sha,
     });
 

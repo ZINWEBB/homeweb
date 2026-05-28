@@ -11,7 +11,7 @@ cloudinary.config({
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = process.env.GITHUB_OWNER;
 const REPO = process.env.GITHUB_REPO;
-const PATH = "data.json";
+const PATH = "HOMELINK-JS/houselisting.json";
 const PASSWORD = process.env.ADMIN_PASSWORD;
 
 exports.handler = async (event) => {
@@ -26,15 +26,15 @@ exports.handler = async (event) => {
       return { statusCode: 401, body: JSON.stringify({ error: "Wrong password" }) };
     }
 
-    if (!fields.id || !fields.title || !fields.price || !fields.location) {
+    if (!fields.id || !fields.venue || !fields.location || !fields.servicetype) {
       return { statusCode: 400, body: JSON.stringify({ error: "Missing required fields" }) };
     }
 
     // Upload new images
-    const newImageUrls = [];
-    for (const file of fields.files) {
+    const newGalleryUrls = [];
+    for (const file of fields.files || []) {
       const result = await uploadToCloudinary(file);
-      newImageUrls.push(result.secure_url);
+      newGalleryUrls.push(result.secure_url);
     }
 
     const { data: fileData } = await octokit.repos.getContent({
@@ -44,7 +44,8 @@ exports.handler = async (event) => {
     });
 
     const content = Buffer.from(fileData.content, "base64").toString();
-    let houses = JSON.parse(content);
+    const data = JSON.parse(content);
+    let houses = data.houselisting || [];
 
     const houseIndex = houses.findIndex(h => h.id === fields.id);
     if (houseIndex === -1) {
@@ -53,20 +54,27 @@ exports.handler = async (event) => {
 
     houses[houseIndex] = {
       ...houses[houseIndex],
-      title: fields.title,
-      price: fields.price,
+      venue: fields.venue,
       location: fields.location,
       description: fields.description || houses[houseIndex].description,
-      whatsapp: fields.whatsapp || houses[houseIndex].whatsapp,
-      images: [...(houses[houseIndex].images || []), ...newImageUrls],
+      basicFee: Number(fields.basicFee) || houses[houseIndex].basicFee,
+      agentFee: fields.agentFee || houses[houseIndex].agentFee,
+      image: fields.image || houses[houseIndex].image || newGalleryUrls[0] || "",
+      totalFee: Number(fields.totalFee) || houses[houseIndex].totalFee,
+      servicetype: fields.servicetype,
+      gallery: [...(houses[houseIndex].gallery || []), ...newGalleryUrls],
+      bedspace: fields.bedspace || houses[houseIndex].bedspace || "",
+      bathspace: fields.bathspace || houses[houseIndex].bathspace || "",
+      compoundspace: fields.compoundspace || houses[houseIndex].compoundspace || "",
+      inspection: Number(fields.inspection) || houses[houseIndex].inspection || 0,
     };
 
     await octokit.repos.createOrUpdateFileContents({
       owner: OWNER,
       repo: REPO,
       path: PATH,
-      message: `Edit house: ${fields.title}`,
-      content: Buffer.from(JSON.stringify(houses, null, 2)).toString("base64"),
+      message: `Edit house: ${fields.venue}`,
+      content: Buffer.from(JSON.stringify({ houselisting: houses }, null, 2)).toString("base64"),
       sha: fileData.sha,
     });
 
@@ -85,5 +93,43 @@ exports.handler = async (event) => {
 };
 
 // Same helper functions as in add-house.js
-function parseMultipartForm(event) { /* ... copy from add-house.js ... */ }
-function uploadToCloudinary(file) { /* ... copy from add-house.js ... */ }
+function parseMultipartForm(event) {
+  return new Promise((resolve, reject) => {
+    const bb = busboy({
+      headers: event.headers,
+      limits: { fileSize: 10 * 1024 * 1024, files: 8 } // 10MB, max 8 files
+    });
+
+    const fields = { files: [] };
+
+    bb.on("file", (name, file, info) => {
+      const chunks = [];
+      file.on("data", (chunk) => chunks.push(chunk));
+      file.on("end", () => {
+        fields.files.push({
+          filename: info.filename,
+          content: Buffer.concat(chunks),
+          contentType: info.mimeType,
+        });
+      });
+    });
+
+    bb.on("field", (name, val) => (fields[name] = val));
+    bb.on("close", () => resolve(fields));
+    bb.on("error", reject);
+
+    bb.end(Buffer.from(event.body, "base64"));
+  });
+}
+
+function uploadToCloudinary(file) {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload_stream(
+      { folder: "jos-homelisting" },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      }
+    ).end(file.content);
+  });
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload House Listing</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
+    form { max-width: 720px; margin: 0 auto; display: grid; gap: 14px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; }
+    input, textarea, select { width: 100%; padding: 10px; border: 1px solid #bbb; border-radius: 6px; }
+    button { padding: 12px 18px; border: none; border-radius: 8px; background: #1f62ff; color: white; cursor: pointer; }
+    .status { margin-top: 14px; padding: 12px; border-radius: 8px; display: none; }
+    .success { background: #e0f5e8; color: #0f6231; }
+    .error { background: #ffe2e3; color: #8a1217; }
+  </style>
+</head>
+<body>
+  <h1>Upload a New House Listing</h1>
+  <p>Use the form below to submit a new property to the Netlify function backend.</p>
+
+  <form id="listingForm">
+    <label for="venue">Venue</label>
+    <input id="venue" name="venue" type="text" required placeholder="3 BEDROOM APARTMENT" />
+
+    <label for="location">Location</label>
+    <input id="location" name="location" type="text" required placeholder="WUSE- MAITAMA, ABUJA" />
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="4" placeholder="Well tiled, already furnished..."></textarea>
+
+    <label for="basicFee">Basic Fee</label>
+    <input id="basicFee" name="basicFee" type="number" min="0" required placeholder="160000" />
+
+    <label for="agentFee">Agent Fee</label>
+    <input id="agentFee" name="agentFee" type="text" placeholder="16000" />
+
+    <label for="totalFee">Total Fee</label>
+    <input id="totalFee" name="totalFee" type="number" min="0" placeholder="145000" />
+
+    <label for="servicetype">Service Type</label>
+    <select id="servicetype" name="servicetype" required>
+      <option value="sale">sale</option>
+      <option value="rent">rent</option>
+    </select>
+
+    <label for="bedspace">Bedspace</label>
+    <input id="bedspace" name="bedspace" type="text" placeholder="3 beds" />
+
+    <label for="bathspace">Bathspace</label>
+    <input id="bathspace" name="bathspace" type="text" placeholder="3 baths" />
+
+    <label for="compoundspace">Compound Space</label>
+    <input id="compoundspace" name="compoundspace" type="text" placeholder="wifi" />
+
+    <label for="inspection">Inspection Fee</label>
+    <input id="inspection" name="inspection" type="number" min="0" placeholder="20000" />
+
+    <label for="image">Main Image URL</label>
+    <input id="image" name="image" type="url" placeholder="https://example.com/image.jpg" />
+
+    <label for="files">Optional Upload Images</label>
+    <input id="files" name="files" type="file" multiple accept="image/*" />
+
+    <label for="password">Admin Password</label>
+    <input id="password" name="password" type="password" required placeholder="Your admin password" />
+
+    <button type="submit">Submit Listing</button>
+  </form>
+
+  <div id="status" class="status"></div>
+
+  <script>
+    const form = document.getElementById('listingForm');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.style.display = 'none';
+
+      const formData = new FormData(form);
+      const files = document.getElementById('files').files;
+      for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+      }
+
+      try {
+        const response = await fetch('/.netlify/functions/add-house', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to submit listing');
+        }
+
+        status.textContent = 'Listing created successfully! ID: ' + (result.house?.id || 'unknown');
+        status.className = 'status success';
+        status.style.display = 'block';
+        form.reset();
+      } catch (error) {
+        status.textContent = error.message;
+        status.className = 'status error';
+        status.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

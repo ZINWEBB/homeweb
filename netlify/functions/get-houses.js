@@ -3,7 +3,7 @@ const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = process.env.GITHUB_OWNER;
 const REPO = process.env.GITHUB_REPO;
-const PATH = "data.json";
+const PATH = "HOMELINK-JS/houselisting.json";
 
 exports.handler = async () => {
   try {
@@ -14,7 +14,7 @@ exports.handler = async () => {
     });
 
     const content = Buffer.from(fileData.content, "base64").toString();
-    const houses = JSON.parse(content);
+    const data = JSON.parse(content);
 
     return {
       statusCode: 200,
@@ -22,7 +22,7 @@ exports.handler = async () => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
       },
-      body: JSON.stringify(houses),
+      body: JSON.stringify(data),
     };
   } catch (error) {
     console.error(error);

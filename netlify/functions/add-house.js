@@ -11,7 +11,7 @@ cloudinary.config({
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = process.env.GITHUB_OWNER;
 const REPO = process.env.GITHUB_REPO;
-const PATH = "data.json";
+const PATH = "HOMELINK-JS/houselisting.json";
 const PASSWORD = process.env.ADMIN_PASSWORD;
 
 exports.handler = async (event) => {
@@ -33,7 +33,7 @@ exports.handler = async (event) => {
     }
 
     // Basic validation
-    if (!fields.title || !fields.price || !fields.location || !fields.whatsapp) {
+    if (!fields.venue || !fields.basicFee || !fields.location || !fields.servicetype) {
       return { 
         statusCode: 400, 
         body: JSON.stringify({ error: "Missing required fields" }) 
@@ -42,7 +42,7 @@ exports.handler = async (event) => {
 
     // Upload images to Cloudinary
     const imageUrls = [];
-    for (const file of fields.files) {
+    for (const file of fields.files || []) {
       const result = await uploadToCloudinary(file);
       imageUrls.push(result.secure_url);
     }
@@ -55,17 +55,24 @@ exports.handler = async (event) => {
     });
 
     const content = Buffer.from(fileData.content, "base64").toString();
-    const houses = JSON.parse(content);
+    const data = JSON.parse(content);
+    const houses = data.houselisting || [];
 
     const newHouse = {
       id: Date.now().toString(),
-      title: fields.title,
-      price: fields.price,
+      venue: fields.venue,
       location: fields.location,
       description: fields.description || "",
-      whatsapp: fields.whatsapp,
-      images: imageUrls,
-      posted: new Date().toISOString(),
+      basicFee: Number(fields.basicFee) || 0,
+      agentFee: fields.agentFee || "",
+      image: imageUrls[0] || fields.image || "",
+      totalFee: Number(fields.totalFee) || Number(fields.basicFee) || 0,
+      servicetype: fields.servicetype,
+      gallery: imageUrls,
+      bedspace: fields.bedspace || "",
+      bathspace: fields.bathspace || "",
+      compoundspace: fields.compoundspace || "",
+      inspection: Number(fields.inspection) || 0,
     };
 
     houses.unshift(newHouse);
@@ -74,8 +81,8 @@ exports.handler = async (event) => {
       owner: OWNER,
       repo: REPO,
       path: PATH,
-      message: `Add new house: ${fields.title}`,
-      content: Buffer.from(JSON.stringify(houses, null, 2)).toString("base64"),
+      message: `Add new house: ${fields.venue}`,
+      content: Buffer.from(JSON.stringify({ houselisting: houses }, null, 2)).toString("base64"),
       sha: fileData.sha,
     });
 
