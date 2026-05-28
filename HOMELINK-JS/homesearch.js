@@ -153,8 +153,8 @@
         const index = Number(btn.dataset.index);
         const property = currentProperties[index];
         if (property) {
-            localStorage.setItem('selectedHouse', JSON.stringify(property));
-            window.location.href = 'detailpage.html';
+            const id = property.id;
+            window.location.href = `detailpage.html?id=${encodeURIComponent(id)}`;
         }
     });
 

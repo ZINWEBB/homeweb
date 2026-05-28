@@ -191,8 +191,8 @@ document.addEventListener('click', (event) => {
     const selectedProperty = currentProperties[index]
     if (!selectedProperty) return
 
-    localStorage.setItem('selectedHouse', JSON.stringify(selectedProperty))
-    window.location.href = 'detailpage.html'
+    const id = selectedProperty.id
+    window.location.href = `detailpage.html?id=${encodeURIComponent(id)}`
 })
 
 // Load data and initialize on page ready

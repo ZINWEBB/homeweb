@@ -117,8 +117,8 @@ function attachEventHandlers() {
     document.querySelectorAll('.feature-grid-rent-container .book-now-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => {
             if (index < homepageRentList.length) {
-                localStorage.setItem('selectedHouse', JSON.stringify(homepageRentList[index]));
-                window.location.href = 'detailpage.html';
+                const id = homepageRentList[index].id
+                window.location.href = `detailpage.html?id=${encodeURIComponent(id)}`;
             }
         });
     });
@@ -127,8 +127,8 @@ function attachEventHandlers() {
     document.querySelectorAll('.feature-grid-sale-container .book-now-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => {
             if (index < homepageSaleList.length) {
-                localStorage.setItem('selectedHouse', JSON.stringify(homepageSaleList[index]));
-                window.location.href = 'detailpage.html';
+                const id = homepageSaleList[index].id
+                window.location.href = `detailpage.html?id=${encodeURIComponent(id)}`;
             }
         });
     });

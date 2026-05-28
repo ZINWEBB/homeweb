@@ -9,9 +9,16 @@ async function loadHouselisting() {
         houselisting = data.houselisting
         console.log('JSON loaded successfully:', houselisting)
         
-        // Get house data from localStorage
-        selectedHouse = JSON.parse(localStorage.getItem('selectedHouse'))
-        console.log('Selected house from localStorage:', selectedHouse)
+        const selectedId = new URLSearchParams(window.location.search).get('id')
+        if (selectedId) {
+            selectedHouse = houselisting.find(item => String(item.id) === selectedId)
+            console.log('Selected house from URL id:', selectedHouse)
+        }
+
+        if (!selectedHouse) {
+            selectedHouse = JSON.parse(localStorage.getItem('selectedHouse'))
+            console.log('Selected house from localStorage fallback:', selectedHouse)
+        }
 
         // If no data, show default message
         if (!selectedHouse) {

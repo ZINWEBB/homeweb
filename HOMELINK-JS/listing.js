@@ -44,10 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let featureMoreDetailBtns = document.querySelectorAll('.feature-more-detail')
     featureMoreDetailBtns.forEach((btn, index) => {
         btn.addEventListener('click', () => {
-            // Save house data to localStorage (map first 5 feature boxes to houselisting)
             if (index < houselisting.length) {
-                localStorage.setItem('selectedHouse', JSON.stringify(houselisting[index]))
-                window.location.href = 'detailpage.html'
+                const id = houselisting[index].id
+                window.location.href = `detailpage.html?id=${encodeURIComponent(id)}`
             }
         })
     })
@@ -177,10 +176,9 @@ function renderproperties(properties) {
     let bookBtns = document.querySelectorAll('.book-now-btn')
     bookBtns.forEach((btn, index) => {
         btn.addEventListener('click', () => {
-            // Save house data to localStorage
-            localStorage.setItem('selectedHouse', JSON.stringify(properties[index]))
-            // Navigate to detailpage
-            window.location.href = 'detailpage.html'
+            const id = properties[index]?.id
+            if (!id) return
+            window.location.href = `detailpage.html?id=${encodeURIComponent(id)}`
         })
     })
 }

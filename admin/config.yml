@@ -12,7 +12,6 @@ media_library:
 collections:
   - name: "houselisting"
     label: "House Listings"
-    folder: ""
     files:
       - file: "HOMELINK-JS/houselisting.json"
         label: "House Listings"
