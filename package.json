@@ -1,0 +1,14 @@
+{
+  "name": "homerigz-backup",
+  "version": "1.0.0",
+  "description": "Netlify functions for HOMERIGZ house listing app",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "@octokit/rest": "^21.0.0",
+    "cloudinary": "^1.39.0",
+    "busboy": "^1.6.0"
+  }
+}
